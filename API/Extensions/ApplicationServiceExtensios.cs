@@ -7,9 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Persistence;
 
-namespace API.Extensios
+namespace API.Extensions
 {
-    public static class ApplicationServiceExtensios
+    public static class ApplicationServiceExtensions
     {
         public static IServiceCollection AddAplicationServices(this IServiceCollection services, IConfiguration config)
         {
