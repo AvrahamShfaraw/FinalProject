@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as Yup from 'yup';
 import MyTextInput from "../../../app/common/form/MyTextInput";
-import MyTextArea from "../../../app/common/MyTextArea";
+import MyTextArea from "../../../app/common/form/MyTextArea";
 import { categoryOptions } from "../../../app/common/options/categoryOptions";
 import MySelectInput from "../../../app/common/form/MySelectInput";
 import MyDateInput from "../../../app/common/form/MyDateInput";
