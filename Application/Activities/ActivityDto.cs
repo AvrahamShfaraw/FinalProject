@@ -18,7 +18,7 @@ namespace Application.Activities
 
 
 
-        public ICollection<Profile> Attendees { get; set; }
+        public ICollection<AttendeeDto> Attendees { get; set; }
 
     }
 }
