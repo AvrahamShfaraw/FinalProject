@@ -35,7 +35,7 @@ export default class ActivityStore {
     }
 
     loadActivities = async () => {
-        this.loadingInitial = true;
+        this.setLoadingInitial(true)
         try {
             const activities = await agent.Activities.list();
             activities.forEach(activity => {
@@ -115,7 +115,6 @@ export default class ActivityStore {
     }
 
     updateActivity = async (activity: ActivityFormValues) => {
-
         try {
             await agent.Activities.update(activity);
             runInAction(() => {

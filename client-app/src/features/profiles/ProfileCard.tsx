@@ -12,7 +12,7 @@ export default observer(function ProfileCard({ profile }: Props) {
         <Card as={Link} to={`/profiles/${profile.userName}`} >
             <Image circular size='mini' src={profile.image || '/assets/user.png'} />
             <CardContent>
-                <CardHeader>{profile.displayName}</CardHeader>
+                <CardHeader>{profile.desplayName}</CardHeader>
                 <CardDescription>Bio goes here</CardDescription>
             </CardContent>
             <CardContent extra>

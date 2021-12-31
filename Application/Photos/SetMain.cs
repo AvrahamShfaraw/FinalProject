@@ -23,7 +23,7 @@ namespace Application.Photos
             public Handler(DataContext conetext, IUserAccessor userAccessor)
             {
                 this._userAccessor = userAccessor;
-                this._conetext = _conetext;
+                this._conetext = conetext;
             }
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
@@ -34,11 +34,12 @@ namespace Application.Photos
                 if (user == null) return null;
 
                 var photo = user.Photos.FirstOrDefault(x => x.Id == request.Id);
+
                 if (photo == null) return null;
 
                 var currentMain = user.Photos.FirstOrDefault(x => x.IsMain);
 
-                if (currentMain.IsMain != null) currentMain.IsMain = false;
+                if (currentMain != null) currentMain.IsMain = false;
 
                 photo.IsMain = true;
 

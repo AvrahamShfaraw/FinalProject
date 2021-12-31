@@ -46,7 +46,7 @@ export default observer(function ActivityDetailedHeader({ activity }: Props) {
                                 <p>{format(activity.date!, 'dd MMM yyyy')}</p>
                                 <p>
                                     Hosted by <strong><Link to={`/profiles/${activity.host?.userName}`}>
-                                        {activity.host?.displayName}
+                                        {activity.host?.desplayName}
                                     </Link></strong>
                                 </p>
                             </Item.Content>
@@ -56,7 +56,6 @@ export default observer(function ActivityDetailedHeader({ activity }: Props) {
             </Segment>
             <Segment clearing attached='bottom'>
                 {activity.isHost ? (
-
                     <>
                         <Button
                             color={activity.isCancelled ? 'green' : 'red'}
@@ -81,7 +80,8 @@ export default observer(function ActivityDetailedHeader({ activity }: Props) {
                 ) : (
                     <Button disabled={activity.isCancelled}
                         loading={loading} onClick={updateAttendance}
-                        color='teal'>Join Activity</Button>
+                        color='teal'>Join Activity
+                    </Button>
                 )}
             </Segment>
         </Segment.Group>

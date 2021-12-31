@@ -22,7 +22,7 @@ export default observer(function NavBar() {
                 </Menu.Item>
                 <Menu.Item position='right'>
                     <Image src={user?.image || '/assets/user.png'} avatar spaced='right' />
-                    <Dropdown pointing='top left' text={user?.displayName}>
+                    <Dropdown pointing='top left' text={user?.desplayName}>
                         <Dropdown.Menu >
                             <Dropdown.Item as={Link} to={`/profiles/${user?.userName}`}
                                 text='My Profile'

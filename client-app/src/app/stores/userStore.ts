@@ -16,8 +16,8 @@ export default class UserStore {
     }
 
     login = async (creds: UserFormValues) => {
-        try {
 
+        try {
             const user = await agent.Account.login(creds);
             store.commonStore.setToken(user.token);
             runInAction(() => this.user = user);
@@ -31,6 +31,7 @@ export default class UserStore {
 
     logout = () => {
         store.commonStore.setToken(null);
+        store.activityStore.loadingInitial = false;
         window.localStorage.removeItem('jwt');
         this.user = null;
         history.push('/');
@@ -59,6 +60,11 @@ export default class UserStore {
         } catch (error) {
             throw error;
         }
+    }
+
+    setImage = (image: string) => {
+        if (this.user) this.user.image = image;
+
     }
 
 }
