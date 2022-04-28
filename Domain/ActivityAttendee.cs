@@ -10,5 +10,6 @@ namespace Domain
         public Activity Activity { get; set; }
         public int MyProperty { get; set; }
         public bool IsHost { get; set; }
+
     }
 }

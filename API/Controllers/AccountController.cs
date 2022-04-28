@@ -1,4 +1,4 @@
-using System.Linq;
+
 using System.Security.Claims;
 using System.Threading.Tasks;
 using API.DTOs;
@@ -32,9 +32,7 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
-            var user = await _userManager.Users.Include(P => P.Photos)
-            .FirstOrDefaultAsync(x => x.Email == loginDto.Email);
-
+            var user = await _userManager.FindByEmailAsync(loginDto.Email);
             if (user == null) return Unauthorized();
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
@@ -53,13 +51,7 @@ namespace API.Controllers
         {
             if (await _userManager.Users.AnyAsync(x => x.Email == registerDto.Email))
             {
-                ModelState.AddModelError("email", "email taken");
-                return ValidationProblem();
-            }
-            if (await _userManager.Users.AnyAsync(x => x.UserName == registerDto.UserName))
-            {
-                ModelState.AddModelError("username", "Username taken");
-                return ValidationProblem();
+                return BadRequest("User name token");
             }
 
             var user = new AppUser
@@ -84,8 +76,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
-            var user = await _userManager.Users.Include(P => P.Photos)
-            .FirstOrDefaultAsync(x => x.Email == User.FindFirstValue(ClaimTypes.Email));
+            var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
             return CreateUserObject(user);
         }
 
@@ -94,7 +85,7 @@ namespace API.Controllers
             return new UserDto
             {
                 DesplayName = user.DesplayName,
-                Image = user?.Photos?.FirstOrDefault(x => x.IsMain)?.Url,
+                Image = null,
                 Token = _tokenService.CreateToken(user),
                 UserName = user.UserName
             };

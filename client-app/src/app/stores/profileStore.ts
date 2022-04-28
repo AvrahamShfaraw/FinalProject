@@ -67,7 +67,6 @@ export default class ProfileStore {
     setMainPhoto = async (photo: Photo) => {
         this.loading = true;
         try {
-
             await agent.Profiles.setMainPhoto(photo.id);
             store.userStore.setImage(photo.url);
             runInAction(() => {
@@ -109,7 +108,22 @@ export default class ProfileStore {
     }
 
 
-
+    updateProfile = async (profile: Partial<Profile>) => {
+        this.loading = true;
+        try {
+            await agent.Profiles.updateProfile(profile);
+            runInAction(() => {
+                if (profile.desplayName && profile.desplayName !== store.userStore.user!.desplayName) {
+                    store.userStore.user!.desplayName = profile.desplayName;
+                }
+                this.profile = { ...this.profile, ...profile as Profile };
+                this.loading = false;
+            })
+        } catch (error) {
+            console.log(error);
+            runInAction(() => this.loading = false);
+        }
+    }
 
 
 
