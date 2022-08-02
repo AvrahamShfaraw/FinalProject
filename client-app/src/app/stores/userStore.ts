@@ -35,6 +35,7 @@ export default class UserStore {
         window.localStorage.removeItem('jwt');
         this.user = null;
         history.push('/');
+        history.go(0);
 
     }
 

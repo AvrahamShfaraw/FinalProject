@@ -5,6 +5,8 @@ import MyTextArea from "../../app/common/form/MyTextArea";
 import MyTextInput from "../../app/common/form/MyTextInput";
 import { useStore } from "../../app/stores/store";
 import * as Yup from 'yup';
+import { history } from "../..";
+
 interface Props {
     setEditMode: (editMode: boolean) => void;
 }
@@ -27,6 +29,7 @@ export default observer(function ProfileEditForm({ setEditMode }: Props) {
             onSubmit={values => {
                 updateProfile(values).then(() => {
                     setEditMode(false);
+                    history.go(0);
                 })
             }}
             validationSchema={Yup.object({
